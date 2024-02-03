@@ -1,3 +1,4 @@
 import ManageCapsule from "./ManageCapsule";
+import TimelineButton from "./TimelineButton";
 
-export { ManageCapsule };
+export { ManageCapsule, TimelineButton };

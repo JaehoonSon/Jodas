@@ -1,11 +1,15 @@
+import {TimelineButton} from "../Components/Master"
+
 const page = () =>
 (
     <>
-        Testing the dumydsadsa
-        dumydsadsa
-        <h1>
-            dsada
-        </h1>
+        <div className={`
+            bg-gradient-to-r from-cyan-500 to-blue-500
+            h-3 w-full rounded-2xl flex justify-evenly
+            `}>
+            <TimelineButton />
+            <TimelineButton />
+        </div>
     </>
 )
 
