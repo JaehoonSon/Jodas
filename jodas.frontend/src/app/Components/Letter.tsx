@@ -1,10 +1,9 @@
-const Letter = () =>
-(
-    <>
+const Letter = () => (
+  <>
     <div>
-        <button className="btn btn-primary">Type it</button>
+      <button className="btn btn-primary">Type it</button>
     </div>
-    </>
-)
+  </>
+);
 
 export default Letter;

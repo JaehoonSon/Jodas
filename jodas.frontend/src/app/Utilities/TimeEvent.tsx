@@ -1,6 +1,3 @@
-const TimeEvent = () =>
-{
-
-}
+const TimeEvent = () => {};
 
 export default TimeEvent;

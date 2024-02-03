@@ -1,5 +1,3 @@
 import ManageCapsule from "./ManageCapsule";
 
-export {
-    ManageCapsule
-};
+export { ManageCapsule };
