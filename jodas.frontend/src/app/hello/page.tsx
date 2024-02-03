@@ -1,3 +1,9 @@
-export default function Hello() {
-  <h1 className="text-2xl">Hello</h1>;
-}
+const Hello = () => {
+  return (
+    <div>
+      <h1>Hello what is up</h1>
+    </div>
+  );
+};
+
+export default Hello;

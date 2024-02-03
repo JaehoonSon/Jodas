@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import NavBar from "./Components/navBar";
+import NavBar from "./Components/NavBar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
