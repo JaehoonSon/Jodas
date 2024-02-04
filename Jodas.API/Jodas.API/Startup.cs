@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
+using Jodas.API.Services;
+using System.Text.Json.Serialization;
+
 namespace Jodas.API;
 
 public class Startup
@@ -14,11 +17,25 @@ public class Startup
         _configuration = configuration;
         _hostingEnvironment = hostingEnvironment;
     }
+
     public void ConfigureServices(IServiceCollection services)
 	{
-		services.AddControllers();
-		services.AddEndpointsApiExplorer();
+		services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+        services.AddEndpointsApiExplorer();
 		services.AddSwaggerGen();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("NextApp", builder =>
+            {
+                builder.WithOrigins(_configuration["frontend_url"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
 
         ConfigureThirdServices(services);
     }
@@ -30,6 +47,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseCors("NextApp");
 
         app.UseHttpsRedirection();
 
@@ -49,6 +67,9 @@ public class Startup
         {
             return new MongoClient(mongoDBConnectionString);
         });
+
+        services.AddSingleton<IHandleUserRequest, HandleUserRequest>();
+        services.AddSingleton<IHandleEventRequest, HandleEventRequest>();
     }
 }
 

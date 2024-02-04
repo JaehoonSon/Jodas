@@ -31,7 +31,7 @@ const config: Config = {
 
           neutral: "#040808",
 
-          "base-100": "#202623",
+          "base-100": "rgb(8,25,60)",
 
           info: "#00dfff",
 

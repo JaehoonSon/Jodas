@@ -4,9 +4,20 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Content } from "next/font/google";
 import "../styles/editorstyles.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Placeholder from "@tiptap/extension-placeholder";
 
 const Tiptap = () => {
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    // Load content from local storage when the component mounts
+    const savedContent = localStorage.getItem("content");
+    if (savedContent) {
+      setContent(savedContent);
+    }
+  }, []);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -19,19 +30,24 @@ const Tiptap = () => {
           keepMarks: true,
         },
       }),
+
+      Placeholder.configure({
+        emptyEditorClass: "is-editor-empty",
+      }),
     ],
-    content: `
-    <p><span>This has a &lt;span&gt; tag without a style attribute, so it’s thrown away.</span></p>
-    <p><span style="">But this one is wrapped in a &lt;span&gt; tag with an inline style attribute, so it’s kept - even if it’s empty for now.</span></p>
-  `,
+
+    content: content,
+
     editorProps: {
       attributes: {
         class:
-          "prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg focus:outline-none",
+          "prose dark:prose-invert prose-sm sm:prose-base  focus:outline-none text-white",
       },
     },
     onUpdate: ({ editor }) => {
-      const json = editor.getHTML();
+      const html = editor.getHTML();
+
+      localStorage.setItem("content", html);
 
       // send the content to an API here
     },
