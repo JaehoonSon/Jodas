@@ -23,7 +23,7 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-          primary: "#ff00d5",
+          primary: "rgb(255,255,255)",
 
           secondary: "#009d8b",
 
@@ -31,7 +31,7 @@ const config: Config = {
 
           neutral: "#040808",
 
-          "base-100": "rgb(8,25,60)",
+          "base-100": "#202623",
 
           info: "#00dfff",
 
