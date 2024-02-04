@@ -3,41 +3,60 @@
 import { useState } from "react";
 import Tiptap from "./TipTap";
 import Upload from "./Upload";
+import { API_URL } from "../Config";
+
 // Import necessary modules
 
 const ManageCapsule = () => {
   const [type, setType] = useState<"file" | "text">("text");
   const [files, setFiles] = useState<File[]>([]);
-  const [data, setData] = useState({
-    contact1: "",
-    contact2: "",
-    date: "",
-  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    console.log(files);
+
+    let data: any = {};
+
     try {
       const formData = new FormData(e.currentTarget);
+
+      for (let [key, value] of formData.entries() as any) {
+        data[key] = value;
+      }
 
       if (type === "file") {
         if (files.length > 0) {
           files.forEach((file) => {
-            formData.append("files", file);
+            data["files"] = files.map((file) => file);
+            // write the files into data object
           });
         } else {
           alert("Please upload a file");
           return;
         }
       } else {
-        const textContent = localStorage.getItem("content") || ""; // Provide a default value if localStorage.getItem("content") is null
-        formData.append("text", textContent);
+        const textContent = localStorage.getItem("content") || "";
+        data["text"] = textContent;
       }
 
-      console.log("Form data:", formData.get("text"));
+      data["capsuleType"] = type;
+      data["createDate"] = new Date().toISOString();
 
-      const apiUrl = "https://api.example.com/upload";
-      const response = await fetch(apiUrl, { method: "POST", body: formData });
+      console.log(data["files"]);
+
+      // formData.append("capsuleType", type);
+      // formData.append("createDate", new Date().toISOString());
+
+      const apiUrl = API_URL + "CreateCapsule";
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        body: JSON.stringify(data),
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -84,13 +103,13 @@ const ManageCapsule = () => {
         >
           <h1 className="text-xl font-bold">Send to space</h1>
           <hr />
-          <label htmlFor="date">Open date</label>
+          <label htmlFor="email">Email</label>
 
           <input
             type="text"
-            name="contact1"
-            id="contact1"
-            placeholder="Contact 1"
+            name="email"
+            id="email"
+            placeholder="Email"
             required
             className="p-2 w-72 rounded text-black"
           />
@@ -103,7 +122,7 @@ const ManageCapsule = () => {
             required
             className="p-2 w-72 rounded text-black"
           />
-          <label htmlFor="date">Open date</label>
+          <label htmlFor="date">Release Date</label>
           <input
             type="date"
             name="date"
@@ -114,7 +133,7 @@ const ManageCapsule = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="bg-blue-400 py-2 mt-4 rounded text-white font-bold hover:bg-blue-300"
+            className="bg-blue-700 py-2 mt-4 rounded text-white font-bold hover:bg-blue-500"
           >
             Send
           </button>
