@@ -20,10 +20,10 @@ const NavBar = () => {
             <Link href={"/register"}>Get Started</Link>
           </li>
           <li>
-            <Link href={"/LoginPage"}>Login</Link>
+            <Link href="/Timeline">TimeLine</Link>
           </li>
           <li>
-            <a>Contact</a>
+            <Link href={"/LoginPage"}>Login</Link>
           </li>
         </ul>
       </div>
