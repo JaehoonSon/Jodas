@@ -4,12 +4,34 @@ import { useState } from "react";
 import Tiptap from "./TipTap";
 import Upload from "./Upload";
 import { API_URL } from "../Config";
+import {useRouter} from "next/navigation";
+
 
 // Import necessary modules
 
 const ManageCapsule = () => {
+
+  const router = useRouter()
   const [type, setType] = useState<"file" | "text">("text");
   const [files, setFiles] = useState<File[]>([]);
+  const [show, setShow] = useState<boolean>(false);
+  const [video, setVideo] = useState<any>(<video
+    src="/rocketFly.mp4"
+    muted
+    autoPlay
+    playsInline
+    className="absolute right-0 top-0 w-full self-stretch object-fit"
+  >
+  </video>);
+
+  const handleAnimation = () => {
+
+    setShow(true);
+    setTimeout(() => {
+      router.push("/Timeline");
+    }, 10000);
+    // setShow(false);
+  }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -68,10 +90,12 @@ const ManageCapsule = () => {
       console.error("Error:", error);
     }
 
+    handleAnimation();
     console.log("Form submitted!");
   };
 
   return (
+    <>
     <div className="flex my-4 w-full text-white gap-28 justify-evenly px-40">
       <div className="flex-wrap flex-shrink-0 grow">
         <div className="flex gap-2 mb-4">
@@ -140,7 +164,13 @@ const ManageCapsule = () => {
         </div>
       </form>
     </div>
+
+{ show &&
+    video
+}
+    </>
   );
+
 };
 
 export default ManageCapsule;
