@@ -1,7 +1,7 @@
 import { API_URL } from "../../Config";
 import BuildQuery from "./BuildQuery";
 
-const GetCapsuleAPI = async (user: string) =>
+const GetCapsuleAPI = (user: string) =>
 {
     const query = {
         "Email": user,
