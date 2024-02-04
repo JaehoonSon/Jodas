@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Tiptap from "./TipTap";
 import Upload from "./Upload";
+import { API_URL } from "../Config";
+
 // Import necessary modules
 
 const ManageCapsule = () => {
@@ -30,14 +32,22 @@ const ManageCapsule = () => {
           return;
         }
       } else {
-        const textContent = localStorage.getItem("content") || ""; // Provide a default value if localStorage.getItem("content") is null
+        const textContent = localStorage.getItem("content") || "";
         formData.append("text", textContent);
       }
 
-      console.log("Form data:", formData.get("text"));
+      formData.append("capsuleType", type);
+      formData.append("createDate", new Date().toISOString());
 
-      const apiUrl = "https://api.example.com/upload";
-      const response = await fetch(apiUrl, { method: "POST", body: formData });
+      const apiUrl = API_URL + "CreateCapsule";
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -84,13 +94,13 @@ const ManageCapsule = () => {
         >
           <h1 className="text-xl font-bold">Send to space</h1>
           <hr />
-          <label htmlFor="date">Open date</label>
+          <label htmlFor="email">Email</label>
 
           <input
             type="text"
-            name="contact1"
-            id="contact1"
-            placeholder="Contact 1"
+            name="email"
+            id="email"
+            placeholder="Email"
             required
             className="p-2 w-72 rounded text-black"
           />
@@ -103,7 +113,7 @@ const ManageCapsule = () => {
             required
             className="p-2 w-72 rounded text-black"
           />
-          <label htmlFor="date">Open date</label>
+          <label htmlFor="date">Release Date</label>
           <input
             type="date"
             name="date"

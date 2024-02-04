@@ -1,30 +1,40 @@
 "use client";
 
 import { API_URL } from "../Config";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+  const router = useRouter();
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     let raw_data = new FormData(e.currentTarget);
-    let data = {};
+    let data: any = {};
     const URL = API_URL + "CreateUsers";
 
-    for (let [key, value] of raw_data.entries()) {
-      data[key] = value;
+    for (let [key, value] of raw_data.entries() as any) {
+      if (key !== "verify_password") {
+        data[key] = value;
+      }
     }
+
+    data["createDate"] = new Date().toISOString();
 
     console.log(data);
 
     let res = await fetch(URL, {
       body: JSON.stringify(data), // Convert data object to JSON string
       method: "POST",
-      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     if (res.ok) {
       let data = await res.json();
       console.log(data);
+      router.push("/home");
     } else {
       console.error("Error:", res.statusText);
     }
@@ -79,7 +89,7 @@ const Register = () => {
 
             <div>
               <button className="btn btn-block bg-blue-900 mt-4" type="submit">
-                Login
+                Register
               </button>
             </div>
           </form>
