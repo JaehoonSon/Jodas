@@ -14,11 +14,26 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'main': "rgba(7,27,69,255)",
+        main: "rgba(7,27,69,255)",
       },
-    }
+    },
   },
-  plugins: [require("daisyui"), require("@tailwindcss/typography")],
+
+  plugins: [
+    require("daisyui"),
+    require("@tailwindcss/typography"),
+    require("tailwind-typewriter")({
+      wordsets: {
+        landing: {
+          words: ["Beyond Memory."],
+        },
+        landing2: {
+          words: ["Go back and forth through TIME with CapSoul!"],
+          delay: 1,
+        },
+      },
+    }),
+  ],
   daisyui: {
     themes: [
       {

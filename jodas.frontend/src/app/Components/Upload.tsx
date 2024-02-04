@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 
-const Upload = (prop: any) => {
-  const [files, setFiles] = useState<File[]>([]);
+interface UploadProps {
+  files: File[];
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+}
+
+const Upload = ({ files, setFiles }: UploadProps) => {
+  // const [files, setFiles] = useState<File[]>([]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +24,7 @@ const Upload = (prop: any) => {
   };
 
   return (
-    <div className={`${prop.className} w-80`}>
+    <div className={`${""} w-80`}>
       <div>
         <form onSubmit={onSubmit}>
           <div className="">
