@@ -14,11 +14,21 @@ public class Startup
         _configuration = configuration;
         _hostingEnvironment = hostingEnvironment;
     }
+
     public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddControllers();
 		services.AddEndpointsApiExplorer();
 		services.AddSwaggerGen();
+        services.AddCors(options =>
+        {
+            options.AddPolicy("NextApp", builder =>
+            {
+                builder.WithOrigins(_configuration["frontend_url"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
 
         ConfigureThirdServices(services);
     }
@@ -30,6 +40,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseCors("NextApp");
 
         app.UseHttpsRedirection();
 
