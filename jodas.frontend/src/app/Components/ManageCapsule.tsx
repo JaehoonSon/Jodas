@@ -10,22 +10,26 @@ import { API_URL } from "../Config";
 const ManageCapsule = () => {
   const [type, setType] = useState<"file" | "text">("text");
   const [files, setFiles] = useState<File[]>([]);
-  const [data, setData] = useState({
-    contact1: "",
-    contact2: "",
-    date: "",
-  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    console.log(files);
+
+    let data: any = {};
+
     try {
       const formData = new FormData(e.currentTarget);
+
+      for (let [key, value] of formData.entries() as any) {
+        data[key] = value;
+      }
 
       if (type === "file") {
         if (files.length > 0) {
           files.forEach((file) => {
-            formData.append("files", file);
+            data["files"] = files.map((file) => file);
+            // write the files into data object
           });
         } else {
           alert("Please upload a file");
@@ -33,20 +37,25 @@ const ManageCapsule = () => {
         }
       } else {
         const textContent = localStorage.getItem("content") || "";
-        formData.append("text", textContent);
+        data["text"] = textContent;
       }
 
-      formData.append("capsuleType", type);
-      formData.append("createDate", new Date().toISOString());
+      data["capsuleType"] = type;
+      data["createDate"] = new Date().toISOString();
+
+      console.log(data["files"]);
+
+      // formData.append("capsuleType", type);
+      // formData.append("createDate", new Date().toISOString());
 
       const apiUrl = API_URL + "CreateCapsule";
       const response = await fetch(apiUrl, {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(data),
         mode: "no-cors",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (response.ok) {
@@ -124,7 +133,7 @@ const ManageCapsule = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="bg-blue-400 py-2 mt-4 rounded text-white font-bold hover:bg-blue-300"
+            className="bg-blue-700 py-2 mt-4 rounded text-white font-bold hover:bg-blue-500"
           >
             Send
           </button>
