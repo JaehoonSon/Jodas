@@ -6,7 +6,7 @@ const Main = () => {
           <span className="type-landing"></span>
         </div>
         <div className="text-4xl">
-          <span className="type-landing2"></span>
+            Go back and forth through TIME with CapSoul!
         </div>
 
         <button className="btn btn-primary w-1/2 btn-lg">Register</button>

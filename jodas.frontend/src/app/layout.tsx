@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-main h-full`}>
         <NavBar />
-        <div className="h-screen flex flex-col">{children}</div>
+        <div className="h-screen">{children}</div>
       </body>
     </html>
   );
