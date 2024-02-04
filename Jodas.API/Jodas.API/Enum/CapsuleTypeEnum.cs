@@ -8,5 +8,7 @@ public enum CapsuleTypeEnum
     [EnumMember(Value = "Letter")]
     Letter,
     [EnumMember(Value = "Image")]
-    Image
+    Image,
+    [EnumMember(Value = "Sound")]
+    Sound
 }

@@ -18,9 +18,15 @@
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Enum\" />
+    <None Remove="Models\Query\" />
+    <None Remove="Models\Body\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Enum\" />
+    <Folder Include="Models\Query\" />
+    <Folder Include="Models\Body\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
