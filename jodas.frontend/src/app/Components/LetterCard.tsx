@@ -1,3 +1,4 @@
+
 const LetterCard = (Capsule:any) => {
     var capsule = Capsule["capsule"];
     var postDate = new Date(capsule.PostDate);
@@ -16,7 +17,7 @@ const LetterCard = (Capsule:any) => {
     });
     return (
         <>
-            <div className="md:p-8 p-2 bg-white flex flex-col shadow-2xl rounded">
+            <div className="md:p-8 p-2 bg-[#f0e2bb] flex flex-col shadow-2xl rounded">
                 <h1 className="font-semibold text-gray-900 leading-none text-xl mt-1 capitalize truncate">{capsule.Location}</h1>
                 <div className="max-w-full flex-1">
                     <p className="text-base font-medium tracking-wide text-gray-600 mt-1">{capsule.ContentLetter}</p>

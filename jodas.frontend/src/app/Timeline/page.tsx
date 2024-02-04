@@ -23,7 +23,7 @@ const page = () => {
 
   return (
     <>
-        <div className="text-4xl p-5 flex justify-center items-center">Welcome to the Album of hell</div>
+    <div className="text-4xl p-5 flex justify-center items-center">Welcome to your CapSoul</div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 p-5">
         {capsules.map((e, index) => (
             <div key={index} className="grid gap-4">
