@@ -2,6 +2,7 @@
 import { TimelineButton } from "../Components/Master";
 import GetCapsuleComponent from "../Utilities/GetCapsuleComponent";
 import React, { useEffect, useState } from "react";
+import Card from "../Components/Card";
 
 const page = () => {
   // const [capsules, setComponent] = useState<JSX.Element[]>([]);
@@ -18,24 +19,18 @@ const page = () => {
     fetchData();
   }, []);
 
-  const test = () => capsules.map((e) => console.log(e));
+
 
   return (
     <>
-      <div
-        className={`
-            bg-gradient-to-r from-cyan-500 to-blue-500
-            h-3 w-full rounded-2xl flex justify-evenly
-            `}
-      >
-        {capsules.map((e) => (
-          <TimelineButton Capsule={e}></TimelineButton>
+        <div className="text-4xl p-5 flex justify-center items-center">Welcome to the Album of hell</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 p-5">
+        {capsules.map((e, index) => (
+            <div key={index} className="grid gap-4">
+                <Card Capsule={e} />
+            </div>
         ))}
-      </div>
-      {/* <button onClick={() => GetCapsuleComponent()}>
-            Button
-        </button>
-        <button onClick={test}>Button1</button> */}
+        </div>
     </>
   );
 };
