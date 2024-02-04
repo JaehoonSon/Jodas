@@ -9,7 +9,8 @@
 
 const TimelineButton = (Capsule:any) =>
 {
-    // var capsule = Capsule["Capsule"];
+    var capsule = Capsule["Capsule"];
+    console.log(capsule)
     return (
 
         <>
@@ -19,9 +20,9 @@ const TimelineButton = (Capsule:any) =>
                 {/* {capsule.capsuleType} */}
                 <div className={"bg-slate-400 h-10 w-10"}>
                     <h1>hello</h1>
-                    {/* <h1>{capsule.capsuleType}</h1>
+                    <h1>{capsule.capsuleType}</h1>
                     <p>{capsule.contentLetter}</p>
-                    <p>At{" "}{capsule.postDate}</p> */}
+                    <p>At{" "}{capsule.postDate}</p>
                 </div>
             </div>
         </>

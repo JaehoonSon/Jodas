@@ -11,8 +11,8 @@ const page = () =>
         const fetchData = async () => {
             let something = [{capsuleType:"hello",postDate:"hdhd",contentLetter:"hej"},];
             const dap = await GetCapsuleComponent();
+            setComponent(dap);
             // setComponent(dap);
-            setComponent(something);
         }
         fetchData();
     }, [])
