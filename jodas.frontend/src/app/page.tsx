@@ -1,12 +1,11 @@
-import Image from "next/image";
-import { ManageCapsule } from "./Components/Master";
-import LoginForm from "./Components/Login";
+import NavBar from "./Components/NavBar";
+import Main from "./Components/Main";
 
 export default function Home() {
   return (
     <>
-      <div className={""}>
-      </div>
+      <NavBar />
+      <Main />
     </>
   );
 }
