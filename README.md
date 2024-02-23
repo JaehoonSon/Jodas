@@ -65,7 +65,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 ## Team Members
 
 - Miguel Fujishiro
-- Lstsk Lin
+- Carson Lin(Lstsk)
 - Jaehoon Son
 - Arys Aikyn
 
